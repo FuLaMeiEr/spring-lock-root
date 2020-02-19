@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.GoodsMapper">
+
+    <resultMap id="goodsMap" type="com.example.demo.bean.GoodsBean">
+        <result column="good_id" property="goodsId" jdbcType="VARCHAR"></result>
+        <result column="name" property="name" jdbcType="VARCHAR"></result>
+        <result column="price" property="price" jdbcType="INTEGER"></result>
+        <result column="inventory" property="inventory" jdbcType="INTEGER"></result>
+        <!--<result column="need_number" property="needNumber" jdbcType="INTEGER"></result>-->
+    </resultMap>
+
+    <select id="getGoodsById" parameterType="java.lang.String" resultMap="goodsMap">
+        select * from goods where goods_id = #{goodsId}
+    </select>
+
+    <update id="updateGoodsInventory" parameterType="com.example.demo.bean.GoodsBean">
+        update order set inventory = #{inventory} where goods_id = #{gooodsId}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OrderMapper">
+
+    <resultMap id="orderMap" type="com.example.demo.bean.OrderBean">
+        <result column="order_id" property="orderId" jdbcType="VARCHAR"></result>
+        <!--<result column="create_time" property="createTime" jdbcType="VARCHAR"></result>-->
+        <result column="order_price" property="orderPrice" jdbcType="INTEGER"></result>
+        <result column="order_type" property="orderType" jdbcType="VARCHAR"></result>
+        <result column="good_Id" property="goodId" jdbcType="VARCHAR"></result>
+        <result column="good_number" property="goodNumber" jdbcType="INTEGER"></result>
+        <!--<collection property="orderBeanList" javaType="com.example.demo.bean.GoodsBean">
+            <id column="good_id" property="goodsId" javaType="String"></id>
+            <result column="name" property="name" javaType="String"></result>
+            <result column="price" property="price" javaType="DECIMAL"></result>
+            <result column="inventory" property="inventory" javaType="int"></result>
+            <result column="need_number" property="needNumber" javaType="int"></result>
+        </collection>-->
+    </resultMap>
+
+    <select id="getOrderById" parameterType="java.lang.String" resultMap="orderMap">
+        select * from order where order_id = #{orderId}
+    </select>
+
+    <insert id="submitOrder" parameterType="com.example.demo.bean.OrderBean">
+        insert into order(order_id,
+        order_price,
+        order_type,
+        good_id,
+        good_number)
+        values { #{orderId},
+        #{orderPrice},
+        #{orderType},
+        #{goodId},
+        #{goodNumber}
+        }
+    </insert>
+
+</mapper>
